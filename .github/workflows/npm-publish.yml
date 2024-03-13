@@ -1,0 +1,41 @@
+name: Publish NPM Package
+
+# Workflow to automate publishing to NPM
+#  - Uses the NPM_TOKEN GitHub secret
+#  - Triggers when a new 'release' is created
+
+on:
+  workflow_dispatch:
+  release:
+    types: [created]
+
+env:
+  RELEASE_NODE_VERSION: "20.x" # https://nodejs.dev/en/about/releases
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: release
+      url: https://www.npmjs.com/package/@spencerlepine/prettier-formatter-config
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.RELEASE_NODE_VERSION }}
+          registry-url: "https://registry.npmjs.org"
+
+      - run: npm install
+
+      - name: Create .npmrc
+        run: |
+          touch .npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
+          echo "always-auth=true" >> .npmrc
+
+      - name: Publish NPM Package
+        run: npm publish --access public --userconfig .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

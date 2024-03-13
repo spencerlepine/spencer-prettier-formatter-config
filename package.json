@@ -1,0 +1,20 @@
+{
+  "name": "@spencerlepine/prettier-formatter-config",
+  "version": "1.0.0",
+  "description": "Shared Prettier configuration to enforce standard code formatting",
+  "main": "index.json",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spencerlepine/spencer-prettier-formatter-config.git"
+  },
+  "author": "Spencer Lepine (@Spencer Lepine)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spencerlepine/spencer-prettier-formatter-config/issues"
+  },
+  "homepage": "https://github.com/spencerlepine/spencer-prettier-formatter-config#readme",
+  "prettier": "./index.json",
+  "peerDependencies": {
+    "prettier": "^2.7.1"
+  }
+}
