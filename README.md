@@ -39,3 +39,18 @@ npm install husky@4.3.8 lint-staged@10.5.4 prettier@2.8.8 --save-dev
 ```sh
 npx prettier --write .
 ```
+
+## GitHub Package Publishing
+
+```
+// .npmrc
+
+//npm.pkg.github.com/:_authToken=<TOKEN>
+@spencerlepine:registry=https://npm.pkg.github.com/
+
+```
+
+```
+$ npm login --scope=spencerlepine --auth-type=legacy --registry=https://npm.pkg.github.com --userconfig .npmrc
+$ npm publish --userconfig .npmrc
+```
